@@ -1,0 +1,113 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Customers API",
+    "description" : "No description",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://vr829bl.eu.api-mocks.com",
+    "description" : "This is your API mock endpoint. When called, it will simulate the behavior of your API."
+  } ],
+  "paths" : {
+    "/customer" : {
+      "get" : {
+        "summary" : "Get list of customers",
+        "responses" : {
+          "200" : {
+            "description" : "status 200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Customers"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a customer",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Customers"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "201",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Customers"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "409",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Customer" : {
+        "type" : "object",
+        "required" : [ "ID" ],
+        "properties" : {
+          "ID" : {
+            "type" : "string"
+          },
+          "NAME" : {
+            "type" : "string"
+          },
+          "LAST_NAME" : {
+            "type" : "string"
+          },
+          "JOB_TITLE" : {
+            "type" : "string"
+          },
+          "EMAIL" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Customers" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Customer"
+        }
+      },
+      "Error" : {
+        "type" : "object",
+        "required" : [ "ID" ],
+        "properties" : {
+          "ID" : {
+            "type" : "string"
+          },
+          "errorCode" : {
+            "type" : "integer",
+            "minimum" : 400,
+            "maximum" : 599
+          },
+          "errorMessage" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
